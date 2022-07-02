@@ -1,4 +1,4 @@
 .DS_Store
-
+.vscode
 requirements.txt
 MacPorts-2.7.2.tar.bz2

@@ -5,7 +5,7 @@ all: update
 install: install-only update
 
 # Update all softwares & package installers
-update: update-brew update-port update-pip update-npm update-yarn update-clitools clean-update
+update: update-brew update-port update-pip update-npm update-yarn update-clitools clean-update update-flutter
 
 # Install all package installers and essential softwares
 install-only: install-clitools install-brew install-port install-npm install-yarn install-rust install-clitools install-casks clean-install
@@ -65,7 +65,15 @@ update-npm:
 
 # Yarn package update
 update-yarn:
-	yarn global update
+	yarn global upgrade
+
+# Flutter update
+update-flutter:
+	flutter upgrade
+
+# Composer update
+update-composer:
+	composer update
 
 # Mac software updates
 update-clitools:
@@ -75,6 +83,10 @@ update-clitools:
 clean-install-port:
 	rm ./MacPorts-2.7.2.tar.bz2
 
+# Clean Composer's Internal Cache
+clean-update-composer:
+	composer clear-cache
+
 # Clean Homebrew's cache
 clean-update-brew:
 	brew autoremove
@@ -83,7 +95,7 @@ clean-update-brew:
 # Clean MacPorts cache
 clean-update-port:
 	sudo port reclaim
-	sudo port clean --all
+#	sudo port clean --all
 
 # Remove generated files and pip's cache
 clean-update-pip:
