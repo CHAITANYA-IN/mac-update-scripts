@@ -8,13 +8,13 @@ install: install-only update
 update: update-brew update-port update-pip update-npm update-yarn update-clitools clean-update update-flutter
 
 # Install all package installers and essential softwares
-install-only: install-clitools install-brew install-port install-npm install-yarn install-rust install-clitools install-casks clean-install
+install-only: install-clitools install-brew install-port install-npm install-yarn install-rust install-clitools install-casks install-pod clean-install
 
 # Cleaning cache and other generated files while install
 clean-install: clean-install-port
 
 # Cleaning cache and other generated files while update
-clean-update: clean-update-brew clean-update-port clean-update-pip clean-update-npm clean-update-yarn clean-update-xcode clean-update-rust
+clean-update: clean-update-brew clean-update-port clean-update-pip clean-update-npm clean-update-yarn clean-update-xcode clean-update-rust clean-update-gem clean-update-pod
 
 # Install Homebrew
 install-brew:
@@ -31,6 +31,10 @@ install-npm:
 # Install yarn
 install-yarn:
 	brew install yarn
+
+# Install pod
+install-pod:
+	sudo gem install cocoapods
 
 # Install rust
 install-rust:
@@ -62,6 +66,14 @@ update-pip:
 update-npm:
 	npm -g update
 	sudo n install stable
+
+# Pod package update
+update-pod:
+	pod update
+
+# Gem package update
+update-gem:
+	sudo gem update
 
 # Yarn package update
 update-yarn:
@@ -105,6 +117,14 @@ clean-update-pip:
 # Clean npm cache (Not required as cache self-heals)
 clean-update-npm:
 	npm -g cache clean
+
+# Clean Gem cache
+clean-update-gem:
+	sudo gem cleanup
+
+# Clean Pod cache
+clean-update-pod:
+	pod cache clean --all
 
 # Clean Yarn cache
 clean-update-yarn:
