@@ -65,7 +65,11 @@ update-pip:
 # Npm package update
 update-npm:
 	npm -g update
-	sudo n install stable
+
+# Haskell package update
+update-ghc:
+	ghcup upgrade
+	cabal update
 
 # Pod package update
 update-pod:
@@ -83,9 +87,14 @@ update-yarn:
 update-flutter:
 	flutter upgrade
 
+# Rust Update
+update-rust:
+	rustup update
+
 # Composer update
 update-composer:
-	composer update
+	composer global self-update
+	composer global update
 
 # Mac software updates
 update-clitools:
@@ -97,7 +106,7 @@ clean-install-port:
 
 # Clean Composer's Internal Cache
 clean-update-composer:
-	composer clear-cache
+	composer global clear-cache
 
 # Clean Homebrew's cache
 clean-update-brew:
@@ -122,6 +131,11 @@ clean-update-npm:
 clean-update-gem:
 	sudo gem cleanup
 
+# Haskell package manager
+clean-update-ghc:
+	ghcup gc --cache
+	cabal clean
+
 # Clean Pod cache
 clean-update-pod:
 	pod cache clean --all
@@ -141,3 +155,17 @@ clean-update-xcode-all:
 # Free up space occupied by rust-docs
 clean-update-rust:
 	cargo --global clean --doc
+
+# Clean pub cache
+clean-update-flutter:
+	flutter pub cache clean
+	dart pub cache clean
+
+# Delete FLutter Cache files
+clean-cache-flutter:
+	sudo rm -rf ~/flutter/bin/cache
+
+# Delete Pod Cache files
+clean-cache-pod:
+	rm -rf "${HOME}/Library/Caches/CocoaPods"
+	rm -rf "`pwd`/Pods/"
